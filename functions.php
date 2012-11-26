@@ -128,14 +128,6 @@ class maze{
             }
         }
         
-        /*
-        //Choix aléatoire de la direction
-        $rand_keys = array_rand($cell_auth, 1);
-        
-        //Sauvegarde de la direction choisie
-        $direction = $cell_auth[$rand_keys];
-        */
-        
         //On répertorie les cellules voisines et leur état et on mets dnas des tableaux
         $possible_cell_virgin   = array();
         $possible_cell_visited  = array();
@@ -203,17 +195,6 @@ class maze{
                     break;
             }
         }
-        /*
-        echo("<pre>");
-        print_r($possible_cell_virgin);
-        echo("</pre>");
-        echo("<pre>");
-        print_r($possible_cell_visited);
-        echo("</pre>");
-        echo("<pre>");
-        print_r($possible_cell_built);
-        echo("</pre>");
-        */
         
         //Si des cellules sont vierges alors on random pour choisir une direction
         if(!empty($possible_cell_virgin)){
@@ -249,8 +230,7 @@ class maze{
                 $this->maze[$next_cell]['wall'][1] = 0;//on casse le mur de la prochaine cellule
             }
             $start_cell=$next_cell;
-            /*echo($next_cell);
-            print_r($this->chemin_parcourus);*/
+
             //#####################################################################################
             $this->buildMaze($start_cell);
         }
