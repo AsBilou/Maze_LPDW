@@ -86,6 +86,31 @@ class maze{
          echo("</pre>");
      }
      
+     public function convertPhpToJavascript($maze){
+         $nbCell = $maze->getNbCells();
+         $startCell = $maze->getStartCell();
+         echo "<script type='text/javascript'> ";
+         echo 'position = ';
+         echo $startCell;
+         echo '; ';
+         echo'maze = Array();'; 
+            for($cell=0;$cell<$nbCell;$cell++){
+                echo "maze[$cell] = Array();";
+                for( $wall=0;$wall<4;$wall++){
+                    $value = $maze->maze[$cell]['wall'][$wall];
+                    echo "maze[";
+                    echo $cell;
+                    echo "][";
+                    echo $wall;
+                    echo "] = ";
+                    echo $value;
+                    echo ";";
+                }
+            }
+        echo '</script>';
+     }
+        
+     
      public function render($maze){
         $column = $maze->getNbColumn();
         $nbCell = $maze->getNbCells();
@@ -108,7 +133,11 @@ class maze{
             if($maze->maze[$i]['wall'][3] == 1){
                     echo 'border_left ';
             }
-            echo'"><img class="'; 
+            echo'"><img ';
+            echo 'id = "';
+            echo $i;
+            echo '" ';
+            echo'class=" '; 
             //Si la cellule en cours est la cellule de départ, alors on affiche le personnage.
             $status=($this->start_cell==$i?'':'disable');
             echo($status);
