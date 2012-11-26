@@ -55,6 +55,45 @@ class maze{
      public function getNbCells(){
         return (($this->line)*($this->column));
      }
+     
+     public function getNbColumn(){
+         return $this->column;
+     }
+     
+     public function toString(){
+         echo("<pre>");
+         print_r($this->maze);
+         echo("</pre>");
+     }
+     
+     public function render($maze){
+        $column = $maze->getNbColumn();
+        $nbCell = $maze->getNbCells();
+         for($i=0;$i<$nbCell;$i++){
+                if(($i % $column) == 0){
+                    echo '<tr>';
+                }
+                echo '<td class="';
+                if($maze->maze[$i]['wall'][0] == 1){
+                        echo 'border_top ';
+                }
+                if($maze->maze[$i]['wall'][1] == 1){
+                        echo 'border_right ';
+                }
+                if($maze->maze[$i]['wall'][2] == 1){
+                        echo 'border_bottom ';
+                }
+                if($maze->maze[$i]['wall'][3] == 1){
+                        echo 'border_left ';
+                }
+                echo'"><img class="'; 
+                echo 'disable';
+                echo'" src="img/pacman.gif"</td>';
+                if(($i % $column) == ($column-1)){
+                    echo '</tr>';
+                }
+            }
+     }
       
      /*
 public function createMaze(){
