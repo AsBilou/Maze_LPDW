@@ -3,9 +3,18 @@ include('functions.php');
 
 
 //Nombre de case en X
-$column = 10;
+if(isset($_GET['column'])){
+    $column = $_GET['column'];
+}else{
+    $column = 10;
+}
+
 //Nombre de case en Y
-$line = 10; 
+if(isset($_GET['line'])){
+    $line = $_GET['line'];
+}else{
+    $line = 10;
+}
 
 
 $maze = new Maze($column,$line);

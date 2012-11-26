@@ -20,6 +20,7 @@ class maze{
     var $maze=array();
     var $start_cell;
     var $random_end;
+    var $chemin_parcourus = array();//on instancie un array qui contiendra le chemin parcourus.
     
     //Constructue de l'objet Maze. On passe en parametre le nombre de ligne et de colonne que nous voulons.
     public function maze($x,$y) {
@@ -27,10 +28,10 @@ class maze{
          $this->column = $y;
          
          //Nombre de cellule au total
-         $nbr_cell = $this->line*$this->line;
+         $nbr_cell = $this->line*$this->column;
          
          //Création du maze complet, sans le chemin. 
-        for($i=0; $i<($this->line*$this->line); $i++){
+        for($i=0; $i<$nbr_cell; $i++){
             //On met toute les autorisations de naviguer à 1
             for($j=0; $j<4; $j++){
                 $this->maze[$i]['auth'][$j] = 1;
@@ -61,7 +62,6 @@ class maze{
         $maze[$this->start_cell]['wall'][2] = 0;//on ouvre le mur éxtérieure de la première cellule = entré du maze
         $this->random_end = rand(0, $x-1);//on random la sortie du maze sur la premiere ligne.
         $maze[$this->random_end]['wall'][0] = 0;//on ouvre le mur éxtérieure de la sortie
-        $chemin_parcourus       =array();//on instancie un array qui contiendra le chemin parcourus
      }
      
      public function getMazeArray(){
@@ -108,7 +108,7 @@ class maze{
             //Si la cellule en cours est la cellule de départ, alors on affiche le personnage.
             $status=($this->start_cell==$i?'':'disable');
             echo($status);
-            echo'" src="img/pacman.gif"</td>';
+            echo'" src="img/pacman.gif" /></td>';
             if(($i % $column) == ($column-1)){
                 echo '</tr>';
             }
@@ -116,7 +116,7 @@ class maze{
      }
       
      /*
-public function createMaze(){
+    public function createMaze(){
         $this->maze[$this->start_cell]['etat'] = 1;//on passe la cellule active en visité
         
         //##############################RANDOM DE LA DIRECTION#################################
