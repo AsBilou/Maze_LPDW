@@ -18,7 +18,8 @@ if(isset($_GET['line'])){
 
 
 $maze = new Maze($column,$line);
-//$maze->createMaze();
+$start_cell = $maze->getStartCell();
+$maze->buildMaze($start_cell);
 //$maze->toString();
 
 ?>
