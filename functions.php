@@ -59,9 +59,9 @@ class maze{
         
         //Sélection aléatoire du point d'entré et de sortie du Maze.
         $this->start_cell = rand($nbr_cell-$x, ($nbr_cell-1));//on random la cellule de dépard sur la derniere ligne.
-        $maze[$this->start_cell]['wall'][2] = 0;//on ouvre le mur éxtérieure de la première cellule = entré du maze
+        $this->maze[$this->start_cell]['wall'][2] = 0;//on ouvre le mur éxtérieure de la première cellule = entré du maze
         $this->random_end = rand(0, $x-1);//on random la sortie du maze sur la premiere ligne.
-        $maze[$this->random_end]['wall'][0] = 0;//on ouvre le mur éxtérieure de la sortie
+        $this->maze[$this->random_end]['wall'][0] = 0;//on ouvre le mur éxtérieure de la sortie
      }
      
      public function getMazeArray(){
@@ -174,7 +174,7 @@ class maze{
                     }
                     break;
                 case 2:     //Quand on descend.
-                    $next_possible_cell = $start_cell + $x;
+                    $next_possible_cell = $start_cell + $this->column;
                     switch ($this->maze[$next_possible_cell]['etat']) {
                         case 0:
                             array_push($possible_cell_virgin, $next_possible_cell);
@@ -217,6 +217,7 @@ class maze{
         
         //Si des cellules sont vierges alors on random pour choisir une direction
         if(!empty($possible_cell_virgin)){
+            $this->maze[$start_cell]['etat'] = 1;
             $rand_keys = array_rand($possible_cell_virgin, 1);
             $next_cell = $possible_cell_virgin[$rand_keys];
             array_push($this->chemin_parcourus,$start_cell);
@@ -247,11 +248,11 @@ class maze{
                 $this->maze[$start_cell]['wall'][3] = 0;//on casse le wall de la cellule
                 $this->maze[$next_cell]['wall'][1] = 0;//on casse le mur de la prochaine cellule
             }
-            //$start_cell=$next_cell;
+            $start_cell=$next_cell;
+            /*echo($next_cell);
+            print_r($this->chemin_parcourus);*/
             //#####################################################################################
             $this->buildMaze($start_cell);
-        }else{
-            echo 'blabla';
         }
      }
 }
