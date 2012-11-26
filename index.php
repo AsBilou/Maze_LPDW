@@ -6,14 +6,14 @@ include('functions.php');
 if(isset($_GET['column'])){
     $column = $_GET['column'];
 }else{
-    $column = 10;
+    $column = 30;
 }
 
 //Nombre de case en Y
 if(isset($_GET['line'])){
     $line = $_GET['line'];
 }else{
-    $line = 10;
+    $line = 30;
 }
 
 
