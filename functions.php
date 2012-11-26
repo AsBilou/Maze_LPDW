@@ -8,13 +8,13 @@ class maze{
     
     public function maze($x,$y) {
          $this->line = $x;
-         $this->column = $y;
+         $this->line = $y;
          
          //Nombre de cellule au total
-         $nbr_cell = $this->line*$this->column;
+         $nbr_cell = $this->line*$this->line;
          
          //CREATION DU FULL MAZE
-        for($i=0; $i<($this->line*$this->column); $i++){
+        for($i=0; $i<($this->line*$this->line); $i++){
         	//On met toute les autorisations de naviguer à 1
         	for($j=0; $j<4; $j++){
         		$maze[$i]['auth'][$j] = 1;
