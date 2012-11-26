@@ -1,4 +1,19 @@
 <?php
+/*
+    les différents état du Maze : 
+        Pour les authorisation :
+            0 = non authorisé
+            1 = Authorisé
+            
+        Pour les murs : 
+            0 = pas de mur
+            1 = mur
+            
+        Pour les passages :
+            0 = Non visité
+            1 = en cours (restera en 'en cours' temps qu'il y aura des cellules a l'état '0')
+            2 = construite (Toutes les cellules voisines sont construite alors on passe a la prochaine 'en cours' et on pass ela cellule actuel en construite).
+*/
 class maze{
     var $line;
     var $column;
@@ -6,6 +21,7 @@ class maze{
     var $start_cell;
     var $random_end;
     
+    //Constructue de l'objet Maze. On passe en parametre le nombre de ligne et de colonne que nous voulons.
     public function maze($x,$y) {
          $this->line = $x;
          $this->column = $y;
@@ -13,7 +29,7 @@ class maze{
          //Nombre de cellule au total
          $nbr_cell = $this->line*$this->line;
          
-         //CREATION DU FULL MAZE
+         //Création du maze complet, sans le chemin. 
         for($i=0; $i<($this->line*$this->line); $i++){
             //On met toute les autorisations de naviguer à 1
             for($j=0; $j<4; $j++){
@@ -39,11 +55,11 @@ class maze{
             
             $this->maze[$i]['etat']=0;//on met l'état de toute les cellules à 0 = 'Non visité'
         }
-        //CREATION DU MAZE
-
-        $this->start_cell = rand($nbr_cell-$x, ($nbr_cell-1));//on random la cellule de dépard
+        
+        //Sélection aléatoire du point d'entré et de sortie du Maze.
+        $this->start_cell = rand($nbr_cell-$x, ($nbr_cell-1));//on random la cellule de dépard sur la derniere ligne.
         $maze[$this->start_cell]['wall'][2] = 0;//on ouvre le mur éxtérieure de la première cellule = entré du maze
-        $this->random_end = rand(0, $x-1);//on random la sortie du maze
+        $this->random_end = rand(0, $x-1);//on random la sortie du maze sur la premiere ligne.
         $maze[$this->random_end]['wall'][0] = 0;//on ouvre le mur éxtérieure de la sortie
         $chemin_parcourus       =array();//on instancie un array qui contiendra le chemin parcourus
      }
@@ -69,30 +85,34 @@ class maze{
      public function render($maze){
         $column = $maze->getNbColumn();
         $nbCell = $maze->getNbCells();
-         for($i=0;$i<$nbCell;$i++){
-                if(($i % $column) == 0){
-                    echo '<tr>';
-                }
-                echo '<td class="';
-                if($maze->maze[$i]['wall'][0] == 1){
-                        echo 'border_top ';
-                }
-                if($maze->maze[$i]['wall'][1] == 1){
-                        echo 'border_right ';
-                }
-                if($maze->maze[$i]['wall'][2] == 1){
-                        echo 'border_bottom ';
-                }
-                if($maze->maze[$i]['wall'][3] == 1){
-                        echo 'border_left ';
-                }
-                echo'"><img class="'; 
-                echo 'disable';
-                echo'" src="img/pacman.gif"</td>';
-                if(($i % $column) == ($column-1)){
-                    echo '</tr>';
-                }
+        
+        //On parcour toutes les lignes du tableaux pour l'afficher.
+        for($i=0;$i<$nbCell;$i++){
+            if(($i % $column) == 0){
+                echo '<tr>';
             }
+            echo '<td class="';
+            if($maze->maze[$i]['wall'][0] == 1){
+                    echo 'border_top ';
+            }
+            if($maze->maze[$i]['wall'][1] == 1){
+                    echo 'border_right ';
+            }
+            if($maze->maze[$i]['wall'][2] == 1){
+                    echo 'border_bottom ';
+            }
+            if($maze->maze[$i]['wall'][3] == 1){
+                    echo 'border_left ';
+            }
+            echo'"><img class="'; 
+            //Si la cellule en cours est la cellule de départ, alors on affiche le personnage.
+            $status=($this->start_cell==$i?'':'disable');
+            echo($status);
+            echo'" src="img/pacman.gif"</td>';
+            if(($i % $column) == ($column-1)){
+                echo '</tr>';
+            }
+        }
      }
       
      /*
