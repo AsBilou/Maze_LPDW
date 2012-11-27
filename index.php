@@ -3,14 +3,14 @@ include('functions.php');
 
 
 //Nombre de case en X
-if(isset($_POST['column'])){
+if((isset($_POST['column']))&&(is_numeric($_POST['column']))){
     $column = $_POST['column'];
 }else{
     $column = 30;
 }
 
 //Nombre de case en Y
-if(isset($_POST['line'])){
+if((isset($_POST['line']))&&(is_numeric($_POST['line']))){
     $line = $_POST['line'];
 }else{
     $line = 30;
