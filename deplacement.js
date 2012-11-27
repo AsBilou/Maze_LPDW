@@ -67,6 +67,6 @@ function rightPacman(){
 function testVictoire(){
     if(position==cellEnd)
     {
-        alert("Gagné");
+        alert("Gagné !");
     }
 }
