@@ -1,5 +1,3 @@
-document.onkeyup('38')=upPacman();
-
 function disablePac(id){
     document.getElementById(id).style.display ="none";
 }
@@ -10,6 +8,25 @@ function activatePac(id){
 
 function alertText($message){
     alert($message);
+}
+
+function touche(e){
+
+    var touche = event.keyCode;
+    
+    var nom = String.fromCharCode(touche);
+    if((nom == "Z")||(nom == "&")){
+        upPacman()
+    }
+    if((nom == "S")||(nom == "(")){
+        downPacman()
+    }
+    if((nom == "Q")||(nom == "%")){
+        leftPacman()
+    }
+    if((nom == "D")||(nom == "'")){
+        rightPacman()
+    }
 }
 
 function upPacman(){

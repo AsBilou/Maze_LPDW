@@ -32,8 +32,9 @@ $maze->buildMaze($start_cell);
         <title>Maze 3000</title>
         <?php $maze->convertPhpToJavascript($maze); ?>
     </head>
-    <body>
+    <body onkeyup="touche(Event);">
         <script  type="text/javascript" src="deplacement.js"></script>
+        <h6>Utilisez z,s,q,d pour vous déplacer</h6>
         <table>
             <?php
             $maze->render($maze);
