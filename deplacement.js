@@ -1,3 +1,5 @@
+document.onkeyup('38')=upPacman();
+
 function disablePac(id){
     document.getElementById(id).style.display ="none";
 }
@@ -19,9 +21,7 @@ function upPacman(){
         activatePac(newPosition);
         position = newPosition;
     }
-    else{
-        alert('mur');
-    }
+
     testVictoire()
 }
 
@@ -34,9 +34,7 @@ function leftPacman(){
         activatePac(newPosition);
         position = newPosition;
     }
-    else{
-        alert('mur');
-    }
+
     testVictoire()
 }
 
@@ -49,9 +47,7 @@ function downPacman(){
         activatePac(newPosition);
         position = newPosition;
     }
-    else{
-        alert('mur');
-    }
+
     testVictoire()
 }
 
@@ -64,9 +60,7 @@ function rightPacman(){
         activatePac(newPosition);
         position = newPosition;
     }
-    else{
-        alert('mur');
-    }
+
     testVictoire()
 }
 
