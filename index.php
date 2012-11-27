@@ -42,6 +42,7 @@ $maze->buildMaze($start_cell);
             <label for="column">Colonne</label>
             <textarea id="column" name="column"></textarea>
             <button type="submit">Générer</button>
+        </form>
         <table>
             <?php
             $maze->render($maze);
