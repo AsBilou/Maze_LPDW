@@ -28,27 +28,41 @@ $maze->buildMaze($start_cell);
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" media="screen" href="style.css">
+        <link rel="stylesheet" media="screen" href="bootstrap.css">
         <title>Maze 3000</title>
         <?php $maze->convertPhpToJavascript($maze); ?>
-        <script type="text/javascript">
-            
-            function disablePac("id"){
-                document.getElementById("id").style.display ="none";
-            }
-            
-            function activatePac('id'){
-                document.getElementById('id').style.display="block";
-            }
-    </script>
     </head>
     <body>
+        <script  type="text/javascript" src="deplacement.js"></script>
         <table>
             <?php
             $maze->render($maze);
             ?>
         </table>
-        <button type="submit" onclick="javascript:activatePac('4')">Active pacman</button>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <button type="submit" onclick="upPacman()">UP</button>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" onclick="leftPacman()">LEFT</button>
+                    </td>
+                    <td>
+                        <button type="submit" onclick="downPacman()">DOWN</button>
+                    </td>
+                    <td>
+                        <button type="submit" onclick="rightPacman()">RIGHT</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </body>
     
 </html>

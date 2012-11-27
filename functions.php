@@ -86,12 +86,28 @@ class maze{
          echo("</pre>");
      }
      
+     public function getCellEnd(){
+         return ($this->random_end);
+     }
+     
+     //Construction du tableau javascript à partir des données du tableau PHP
      public function convertPhpToJavascript($maze){
          $nbCell = $maze->getNbCells();
          $startCell = $maze->getStartCell();
+         $nbColumn = $maze->getNbColumn();
+         $cellEnd = $maze->getCellEnd();
          echo "<script type='text/javascript'> ";
          echo 'position = ';
          echo $startCell;
+         echo '; ';
+         echo 'nbColumn = ';
+         echo $nbColumn;
+         echo '; ';
+         echo 'nbCell = ';
+         echo $nbCell;
+         echo '; ';
+         echo 'cellEnd = ';
+         echo $cellEnd;
          echo '; ';
          echo'maze = Array();'; 
             for($cell=0;$cell<$nbCell;$cell++){
