@@ -2,10 +2,7 @@
 function disablePac(id){
     id_img = 'img_'+id;
     document.getElementById(id_img).style.display ="none";
-    element = document.getElementById(id);
-    styleCell = element.className;
-    styleCell = styleCell+" color"
-    element.setAttribute("class", styleCell);
+
 }
 //Affiche le bonhomme
 function activatePac(id){
