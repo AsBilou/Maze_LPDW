@@ -3,15 +3,15 @@ include('functions.php');
 
 
 //Nombre de case en X
-if(isset($_GET['column'])){
-    $column = $_GET['column'];
+if(isset($_POST['column'])){
+    $column = $_POST['column'];
 }else{
     $column = 30;
 }
 
 //Nombre de case en Y
-if(isset($_GET['line'])){
-    $line = $_GET['line'];
+if(isset($_POST['line'])){
+    $line = $_POST['line'];
 }else{
     $line = 30;
 }
@@ -34,7 +34,14 @@ $maze->buildMaze($start_cell);
     </head>
     <body onkeyup="touche(Event);">
         <script  type="text/javascript" src="deplacement.js"></script>
-        <h6>Utilisez z,s,q,d pour vous déplacer</h6>
+        <h3>Utilisez z,s,q,d pour vous déplacer</h6>
+        <h6>changer la taille du tableau</h6>
+        <form accept="index.php" method="post">
+            <label for="line">Ligne</label>
+            <textarea id="line" name="line"></textarea>
+            <label for="column">Colonne</label>
+            <textarea id="column" name="column"></textarea>
+            <button type="submit">Générer</button>
         <table>
             <?php
             $maze->render($maze);
