@@ -1,3 +1,4 @@
+//Cache le bonhomme et crée une trainé de couleur
 function disablePac(id){
     id_img = 'img_'+id;
     document.getElementById(id_img).style.display ="none";
@@ -6,16 +7,13 @@ function disablePac(id){
     styleCell = styleCell+" color"
     element.setAttribute("class", styleCell);
 }
-
+//Affiche le bonhomme
 function activatePac(id){
     id_img = 'img_'+id;
     document.getElementById(id_img).style.display="block";
 }
 
-function alertText($message){
-    alert($message);
-}
-
+//Fonction appeler lors de l'appui d'une touche
 function touche(e){
 
     var touche = event.keyCode;
@@ -35,6 +33,7 @@ function touche(e){
     }
 }
 
+//Fait monter le bonhomme
 function upPacman(){
     var newPosition;
     if((maze[position][0]==0)&&((position-nbColumn)>=0))
@@ -48,6 +47,7 @@ function upPacman(){
     testVictoire()
 }
 
+//Fait aller a gauche le bonhomme
 function leftPacman(){
     var newPosition;
     if(maze[position][3]==0)
@@ -61,6 +61,7 @@ function leftPacman(){
     testVictoire()
 }
 
+//Fait descendre le bonhomme
 function downPacman(){
     var newPosition;
     if((maze[position][2]==0)&&((position+nbColumn)<nbCell))
@@ -74,6 +75,7 @@ function downPacman(){
     testVictoire()
 }
 
+//Fait aller a droite le bonhomme
 function rightPacman(){
     var newPosition;
     if(maze[position][1]==0)
@@ -87,6 +89,7 @@ function rightPacman(){
     testVictoire()
 }
 
+//Vérifie si le bonhomme est sur la case final du maze
 function testVictoire(){
     if(position==cellEnd)
     {
