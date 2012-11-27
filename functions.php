@@ -136,7 +136,9 @@ class maze{
             if(($i % $column) == 0){
                 echo '<tr>';
             }
-            echo '<td class="';
+            echo '<td id="';
+            echo $i;
+            echo '" class="';
             if($maze->maze[$i]['wall'][0] == 1){
                     echo 'border_top ';
             }
@@ -150,7 +152,7 @@ class maze{
                     echo 'border_left ';
             }
             echo'"><img ';
-            echo 'id = "';
+            echo 'id = "img_';
             echo $i;
             echo '" ';
             echo'class=" '; 

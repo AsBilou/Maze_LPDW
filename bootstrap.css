@@ -184,3 +184,7 @@ table td {
 .active {
     display: block;
 }
+
+.color {
+    background-color: rgb(227,118,0);
+}

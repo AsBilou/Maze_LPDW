@@ -1,9 +1,15 @@
 function disablePac(id){
-    document.getElementById(id).style.display ="none";
+    id_img = 'img_'+id;
+    document.getElementById(id_img).style.display ="none";
+    element = document.getElementById(id);
+    styleCell = element.className;
+    styleCell = styleCell+" color"
+    element.setAttribute("class", styleCell);
 }
 
 function activatePac(id){
-    document.getElementById(id).style.display="block";
+    id_img = 'img_'+id;
+    document.getElementById(id_img).style.display="block";
 }
 
 function alertText($message){
