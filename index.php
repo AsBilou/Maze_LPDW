@@ -17,7 +17,7 @@ if(isset($_POST['line'])){
 }
 
 
-$maze = new Maze($column,$line);
+$maze = new Maze($line,$column);
 $start_cell = $maze->getStartCell();
 $maze->buildMaze($start_cell);
 

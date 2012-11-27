@@ -188,3 +188,11 @@ table td {
 .color {
     background-color: rgb(227,118,0);
 }
+
+.colorStart {
+    background-color: #16ff00;
+}
+
+.colorEnd {
+    background-color: #ff3000;
+}

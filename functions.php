@@ -37,16 +37,16 @@ class maze{
                 $this->maze[$i]['auth'][$j] = 1;
             }
             //On check les exceptions pour les cotés du maze
-            if($i < $this->line){
+            if($i < $this->column){
                 $this->maze[$i]['auth'][0] = 0;//premiere ligne on met les autorisations de monter à 0
             }
-            if($i>=($nbr_cell-$this->line)){
+            if($i>=($nbr_cell-$this->column)){
                 $this->maze[$i]['auth'][2] = 0;//Derniere ligne, on met les autorisations de descendre à 0
             }
-            if(($i % $this->line) == 0){
+            if(($i % $this->column) == 0){
                 $this->maze[$i]['auth'][3] = 0;//La colonne de gauche, on met les autorisations de tourner à gauche à 0
             }
-            if(($i % $this->line) == ($this->line-1)){
+            if(($i % $this->column) == ($this->column-1)){
                 $this->maze[$i]['auth'][1] = 0;//la colonne de droite, on met les autorisations de tourner à droite à 0
             }
             
@@ -58,9 +58,9 @@ class maze{
         }
         
         //Sélection aléatoire du point d'entré et de sortie du Maze.
-        $this->start_cell = rand($nbr_cell-$x, ($nbr_cell-1));//on random la cellule de dépard sur la derniere ligne.
+        $this->start_cell = rand($nbr_cell-$this->column, ($nbr_cell-1));//on random la cellule de dépard sur la derniere ligne.
         $this->maze[$this->start_cell]['wall'][2] = 0;//on ouvre le mur éxtérieure de la première cellule = entré du maze
-        $this->random_end = rand(0, $x-1);//on random la sortie du maze sur la premiere ligne.
+        $this->random_end = rand(0, $this->column-1);//on random la sortie du maze sur la premiere ligne.
         $this->maze[$this->random_end]['wall'][0] = 0;//on ouvre le mur éxtérieure de la sortie
      }
      
@@ -150,6 +150,11 @@ class maze{
             }
             if($maze->maze[$i]['wall'][3] == 1){
                     echo 'border_left ';
+            }
+            if($i == $this->start_cell){
+                echo 'colorStart ';
+            }elseif($i == $this->random_end){
+                echo 'colorEnd ';
             }
             echo'"><img ';
             echo 'id = "img_';
