@@ -32,6 +32,23 @@ function touche(e){
         rightPacman()
     }
 }
+/* Direction :
+	UP : 0
+	DOWN : 2
+	LEFT : 3
+	RIGHT : 4
+	*/
+function canMove(positionActuelle, direction)
+{
+	var next = getNextCell(positionActuelle, direction);
+	if(next < 0 || next >= (nbCell -1))
+		return false;
+	
+	if(maze[positionActuelle]!= undefined)
+	    return !maze[positionActuelle][direction]
+	else
+	    return false
+}
 
 //Fait monter le bonhomme
 function upPacman(){
@@ -143,24 +160,50 @@ function getNextCellAndMove(currentCell,direction){
     return nextCell;
 }
 
+var tabVisite = Array();
 //resolution du maze automatiquement
 function tryMaze(startCell) {
     //recuperer la cellule actuel
     
     //recuperer les cellule accésible
     
-    var possible_direction = Array();
+		
+	if(startCell == undefined)
+		return -1;
+	//var cellulesAdjacentes;
+	var possible_direction = Array();
     for(var i=0;i<4;i++) {
-        if(maze[startCell][i]==0) {
-            //On verrifie qu'on ne sort pas du maze au niveau des entrée et sortie.
-            if(((i==2)&&(startCell+nbColumn>nbCell))||((i==0)&&(startCell-nbColumn<0))||(chemin_parcouru.inArray(getNextCell(startCell,i)))) {
-                //On ne permet pas d'y aller
-            }else {
-                possible_direction.push(i);
-                //alert(possible_direction);
-            }
-        }
+        if(canMove(startCell,i)) // Si il n'y a pas de mur
+		{
+			var celluleCible = getNextCell(startCell,i);
+			if(celluleCible == undefined)
+				continue;
+			if(!tabVisite.inArray(celluleCible)) // On a pas encore visiter la case
+			{
+				tabVisite.push(celluleCible);
+				if(celluleCible == cellEnd)
+				{
+					chemin_parcouru.push(startCell);
+					return 1;
+				}
+				else
+				{
+					if(tryMaze(celluleCible) == 1) // si la cellule est celle trouvée 
+					{
+						chemin_parcouru.push(startCell);
+						return 1
+					}
+				}
+			}
+		}
     }
+	
+	return -1; // Cul de sac
+	
+	
+	
+	/*
+    
     
     if(possible_direction.length>0){
         //faire un ramdom des direction disponible
@@ -181,7 +224,7 @@ function tryMaze(startCell) {
         reinit();
         chemin_parcouru=Array();
         return 0;
-    }
+    }*/
 }
 
 function resolveMaze(){
@@ -199,7 +242,8 @@ function resolveMaze(){
         nbEssai++;
     }
     alert("Nombre d'essai : "+nbEssai);
-    traceRoad(chemin_parcouru);
+    traceRoad(chemin_parcouru,"color2");
+	traceRoad(tabVisite);
 
 }
 
@@ -212,7 +256,19 @@ function reinit(){
     position=positionFixe;
 }
 
-function traceRoad(chemin_parcouru) {
+function traceRoad(chemin_parcouru,class_name) {
+	if( class_name == undefined)
+		class_name = "color";
+    //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
+        for(var y=0;y<chemin_parcouru.length-1;y++){
+            element = document.getElementById(chemin_parcouru[y]);
+            styleCell = element.className;
+            styleCell = styleCell+" "+class_name;
+            element.setAttribute("class", styleCell);
+        }
+}
+
+/*function traceRoad(chemin_parcouru) {
     //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
         for(var y=0;y<chemin_parcouru.length-1;y++){
             element = document.getElementById(chemin_parcouru[y]);
@@ -220,7 +276,7 @@ function traceRoad(chemin_parcouru) {
             styleCell = styleCell+" color"
             element.setAttribute("class", styleCell);
         }
-}
+}*/
 
 function colorCell(currentCell) {
     //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
