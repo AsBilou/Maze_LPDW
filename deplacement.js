@@ -36,7 +36,7 @@ function touche(e){
 //Fait monter le bonhomme
 function upPacman(){
     var newPosition;
-    if((maze[position][0]==0)&&((position-nbColumn)>=0))
+    if((maze[position][0]==0)&&((position-nbColumn)>=0)&&(testVictoire()==false))
     {
         newPosition = position-nbColumn;
         disablePac(position);
@@ -51,7 +51,7 @@ function upPacman(){
 //Fait aller a gauche le bonhomme
 function leftPacman(){
     var newPosition;
-    if(maze[position][3]==0)
+    if((maze[position][3]==0)&&(testVictoire()==false))
     {
         newPosition = position-1;
         disablePac(position);
@@ -66,7 +66,7 @@ function leftPacman(){
 //Fait descendre le bonhomme
 function downPacman(){
     var newPosition;
-    if((maze[position][2]==0)&&((position+nbColumn)<nbCell))
+    if((maze[position][2]==0)&&((position+nbColumn)<nbCell)&&(testVictoire()==false))
     {
         newPosition = position+nbColumn;
         disablePac(position);
@@ -81,7 +81,7 @@ function downPacman(){
 //Fait aller a droite le bonhomme
 function rightPacman(){
     var newPosition;
-    if(maze[position][1]==0)
+    if((maze[position][1]==0)&&(testVictoire()==false))
     {
         newPosition = position+1;
         disablePac(position);
@@ -97,8 +97,11 @@ function rightPacman(){
 function testVictoire(){
     if(position==cellEnd)
     {
-        alert("Gagné !");
+        //alert("Gagné !");
         return true;
+    }
+    else{
+        return false;
     }
 }
 
@@ -168,10 +171,11 @@ function tryMaze(startCell) {
         nextCell = getNextCellAndMove(startCell,rndVal);
         //alert(nextCell);
         if(testVictoire()) {
-            alert('fin du maze');
+            alert('Maze résolu');
+            chemin_parcouru.push(nextCell);
             return 1;
         }else{
-            tryMaze(nextCell);
+            return tryMaze(nextCell);
         }
     }else{
         reinit();
@@ -189,11 +193,12 @@ function resolveMaze(){
         beginCell = positionFixe;
         status=tryMaze(beginCell);
         if(status==1){
-            alert('passage a 1');
+            //alert('passage a 1');
             tryAgain=1;
         }
         nbEssai++;
     }
+    traceRoad(chemin_parcouru);
     alert("Nombre d'essai : "+nbEssai);
 }
 
