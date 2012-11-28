@@ -198,8 +198,9 @@ function resolveMaze(){
         }
         nbEssai++;
     }
-    traceRoad(chemin_parcouru);
     alert("Nombre d'essai : "+nbEssai);
+    traceRoad(chemin_parcouru);
+
 }
 
 //réinitialise la résolution du maze
