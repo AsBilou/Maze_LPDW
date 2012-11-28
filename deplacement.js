@@ -41,7 +41,7 @@ function touche(e){
 function canMove(positionActuelle, direction)
 {
 	var next = getNextCell(positionActuelle, direction);
-	if(next < 0 || next >= (nbCell -1))
+	if(next < 0 || next >= (nbCell))
 		return false;
 	
 	if(maze[positionActuelle]!= undefined)
@@ -171,7 +171,7 @@ function tryMaze(startCell) {
 	if(startCell == undefined)
 		return -1;
 	//var cellulesAdjacentes;
-	var possible_direction = Array();
+	tabVisite.push(startCell);
     for(var i=0;i<4;i++) {
         if(canMove(startCell,i)) // Si il n'y a pas de mur
 		{
@@ -180,7 +180,6 @@ function tryMaze(startCell) {
 				continue;
 			if(!tabVisite.inArray(celluleCible)) // On a pas encore visiter la case
 			{
-				tabVisite.push(celluleCible);
 				if(celluleCible == cellEnd)
 				{
 					chemin_parcouru.push(startCell);
