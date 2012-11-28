@@ -100,6 +100,9 @@ class maze{
          echo 'position = ';
          echo $startCell;
          echo '; ';
+         echo 'positionFixe = ';
+         echo $startCell;
+         echo '; ';
          echo 'nbColumn = ';
          echo $nbColumn;
          echo '; ';
@@ -185,7 +188,6 @@ class maze{
         $possible_cell_visited  = array();
         $possible_cell_built    = array();
         
-        //On parcour toutes les directions disponibles.
         foreach($cell_auth as $key=>$possible_direction){
             switch ($possible_direction){
                 case 0:     //Quand on monte

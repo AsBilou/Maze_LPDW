@@ -6,14 +6,14 @@ include('functions.php');
 if((isset($_POST['column']))&&(is_numeric($_POST['column']))){
     $column = $_POST['column'];
 }else{
-    $column = 30;
+    $column = 10;
 }
 
 //Nombre de case en Y
 if((isset($_POST['line']))&&(is_numeric($_POST['line']))){
     $line = $_POST['line'];
 }else{
-    $line = 30;
+    $line = 10;
 }
 
 
@@ -54,6 +54,7 @@ $maze->buildMaze($start_cell);
             <textarea id="column" name="column"></textarea>
             <button type="submit">Générer</button>
         </form>
+        <button type="submit" onclick="resolveMaze();">Resolve</button>
         <table>
             <?php
             $maze->render($maze);
