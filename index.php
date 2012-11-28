@@ -55,12 +55,12 @@ $maze->buildMaze($start_cell);
             <button type="submit">Générer</button>
         </form>
         <button type="submit" onclick="resolveMaze();">Resolve</button>
-        <table>
+        <table class="maze">
             <?php
             $maze->render($maze);
             ?>
         </table>
-        <table>
+        <table class="controls">
             <tbody>
                 <tr>
                     <td>
