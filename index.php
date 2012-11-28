@@ -32,6 +32,7 @@ $maze->buildMaze($start_cell);
         <title>Maze 3000</title>
         <?php $maze->convertPhpToJavascript($maze); ?>
         <script type="text/javascript">
+            document.addEventListener('keyup',function(){touche(Event);},false);
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-36652122-1']);
             _gaq.push(['_trackPageview']);
@@ -43,9 +44,9 @@ $maze->buildMaze($start_cell);
             })();
         </script>
     </head>
-    <body onkeyup="touche(Event);">
+    <body>
         <script  type="text/javascript" src="deplacement.js"></script>
-        <h3>Utilisez z,s,q,d pour vous déplacer</h6>
+        <h3>Utilisez z,s,q,d pour vous déplacer (Ne fonctionne pas sur firefox).</h6>
         <h6>changer la taille du tableau</h6>
         <form accept="index.php" method="post">
             <label for="line">Ligne</label>

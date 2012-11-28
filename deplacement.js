@@ -20,34 +20,35 @@ function touche(e){
     
     var nom = String.fromCharCode(touche);
     if((nom == "Z")||(nom == "&")){
-        upPacman()
+        upPacman();
     }
     if((nom == "S")||(nom == "(")){
-        downPacman()
+        downPacman();
     }
     if((nom == "Q")||(nom == "%")){
-        leftPacman()
+        leftPacman();
     }
     if((nom == "D")||(nom == "'")){
-        rightPacman()
+        rightPacman();
     }
 }
+
 /* Direction :
-	UP : 0
-	DOWN : 2
-	LEFT : 3
-	RIGHT : 4
-	*/
+    UP      : 0
+    RIGHT   : 1
+    DOWN    : 2
+    LEFT    : 3
+    */
 function canMove(positionActuelle, direction)
 {
-	var next = getNextCell(positionActuelle, direction);
-	if(next < 0 || next >= (nbCell))
-		return false;
-	
-	if(maze[positionActuelle]!= undefined)
-	    return !maze[positionActuelle][direction]
-	else
-	    return false
+    var next = getNextCell(positionActuelle, direction);
+    if(next < 0 || next >= (nbCell))
+        return false;
+    
+    if(maze[positionActuelle]!= undefined)
+        return !maze[positionActuelle][direction];
+    else
+        return false;
 }
 
 //Fait monter le bonhomme
@@ -159,7 +160,7 @@ function getNextCellAndMove(currentCell,direction){
     }
     return nextCell;
 }
-
+//Contient toute les case visitée/traité
 var tabVisite = Array();
 //resolution du maze automatiquement
 function tryMaze(startCell) {
@@ -167,63 +168,38 @@ function tryMaze(startCell) {
     
     //recuperer les cellule accésible
     
-		
-	if(startCell == undefined)
-		return -1;
-	//var cellulesAdjacentes;
-	tabVisite.push(startCell);
+        
+    if(startCell == undefined)
+        return -1;
+    //var cellulesAdjacentes;
+    tabVisite.push(startCell);
+    //On test toute les direction en commencant par le haut
     for(var i=0;i<4;i++) {
         if(canMove(startCell,i)) // Si il n'y a pas de mur
-		{
-			var celluleCible = getNextCell(startCell,i);
-			if(celluleCible == undefined)
-				continue;
-			if(!tabVisite.inArray(celluleCible)) // On a pas encore visiter la case
-			{
-				if(celluleCible == cellEnd)
-				{
-					chemin_parcouru.push(startCell);
-					return 1;
-				}
-				else
-				{
-					if(tryMaze(celluleCible) == 1) // si la cellule est celle trouvée 
-					{
-						chemin_parcouru.push(startCell);
-						return 1
-					}
-				}
-			}
-		}
-    }
-	
-	return -1; // Cul de sac
-	
-	
-	
-	/*
-    
-    
-    if(possible_direction.length>0){
-        //faire un ramdom des direction disponible
-        var rndVal=possible_direction[Math.floor(Math.random()*possible_direction.length)];
-        //On sauvegarde la position actuel dans un tableau
-        chemin_parcouru.push(startCell);
-        //On cherche la cellule qui correspond au sens choisi.
-        nextCell = getNextCellAndMove(startCell,rndVal);
-        //alert(nextCell);
-        if(testVictoire()) {
-            alert('Maze résolu');
-            chemin_parcouru.push(nextCell);
-            return 1;
-        }else{
-            return tryMaze(nextCell);
+        {
+            var celluleCible = getNextCell(startCell,i);
+            if(celluleCible == undefined)
+                continue;
+            if(!tabVisite.inArray(celluleCible)) // On a pas encore visiter la case
+            {
+                if(celluleCible == cellEnd)
+                {
+                    chemin_parcouru.push(startCell);
+                    return 1;
+                }
+                else
+                {
+                    if(tryMaze(celluleCible) == 1) // si la cellule est celle trouvée 
+                    {
+                        chemin_parcouru.push(startCell);
+                        return 1
+                    }
+                }
+            }
         }
-    }else{
-        reinit();
-        chemin_parcouru=Array();
-        return 0;
-    }*/
+    }
+    
+    return -1; // Cul de sac
 }
 
 function resolveMaze(){
@@ -242,7 +218,7 @@ function resolveMaze(){
     }
     alert("Nombre d'essai : "+nbEssai);
     traceRoad(chemin_parcouru,"color2");
-	traceRoad(tabVisite);
+    traceRoad(tabVisite);
 
 }
 
@@ -256,8 +232,8 @@ function reinit(){
 }
 
 function traceRoad(chemin_parcouru,class_name) {
-	if( class_name == undefined)
-		class_name = "color";
+    if( class_name == undefined)
+        class_name = "color";
     //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
         for(var y=0;y<chemin_parcouru.length-1;y++){
             element = document.getElementById(chemin_parcouru[y]);
@@ -266,16 +242,6 @@ function traceRoad(chemin_parcouru,class_name) {
             element.setAttribute("class", styleCell);
         }
 }
-
-/*function traceRoad(chemin_parcouru) {
-    //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
-        for(var y=0;y<chemin_parcouru.length-1;y++){
-            element = document.getElementById(chemin_parcouru[y]);
-            styleCell = element.className;
-            styleCell = styleCell+" color"
-            element.setAttribute("class", styleCell);
-        }
-}*/
 
 function colorCell(currentCell) {
     //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
