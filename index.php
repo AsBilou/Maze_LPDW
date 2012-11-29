@@ -44,7 +44,7 @@ $maze->buildMaze($start_cell);
         </script>
     </head>
     <body>
-        <script  type="text/javascript" src="jquery.js"></script>
+        <script  type="text/javascript" src="plugin/jquery.js"></script>
         <script  type="text/javascript" src="deplacement.js"></script>
         <h3>Utilisez z,s,q,d pour vous déplacer.</h6>
         <h6>changer la taille du tableau</h6>
