@@ -14,24 +14,22 @@ function activatePac(id){
 }
 
 //Fonction appeler lors de l'appui d'une touche
-function touche(e){
-
-    var touche = event.keyCode;
-    
-    var nom = String.fromCharCode(touche);
-    if((nom == "Z")||(nom == "&")){
+$(document).keydown(function(e){
+    nom = e.keyCode;
+    console.log(nom);
+    if((nom == 38)||(nom == 90)){
         upPacman();
     }
-    if((nom == "S")||(nom == "(")){
+    if((nom == 40)||(nom == 83)){
         downPacman();
     }
-    if((nom == "Q")||(nom == "%")){
+    if((nom == 37)||(nom == 81)){
         leftPacman();
     }
-    if((nom == "D")||(nom == "'")){
+    if((nom == 39)||(nom == 68)){
         rightPacman();
     }
-}
+});
 
 /* Direction :
     UP      : 0
