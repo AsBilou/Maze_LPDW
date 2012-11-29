@@ -1,22 +1,35 @@
-//Variable globale
-var chemin_parcouru = Array(); 
+/*
+    Description du tabelau maze :
+        maze[cell][0|1|2|3]=murs
+                  
+    Les directions : 
+            0 = Nord
+            1 = Est
+            2 = Sud
+            3 = Ouest
+                  
+    Les différents état du Maze : 
+        Pour les murs           'wall': 
+            0 = pas de mur
+            1 = mur
+*/
 
-//Cache le bonhomme et crée une trainé de couleur
-function disablePac(id){
-    id_img = 'img_'+id;
-    document.getElementById(id_img).style.display ="none";
+/*******************
+*Variables globales*
+********************/
 
-}
-//Affiche le bonhomme
-function activatePac(id){
-    id_img = 'img_'+id;
-    document.getElementById(id_img).style.display="block";
-}
+//Contient le chemin final.
+var chemin_parcouru = Array();
+//Contient toute les cases visitée/traité
+var tabVisite = Array();
+
+/*********
+*Listener*
+**********/
 
 //Fonction appeler lors de l'appui d'une touche
 $(document).keydown(function(e){
     nom = e.keyCode;
-    console.log(nom);
     if((nom == 38)||(nom == 90)){
         upPacman();
     }
@@ -31,12 +44,22 @@ $(document).keydown(function(e){
     }
 });
 
-/* Direction :
-    UP      : 0
-    RIGHT   : 1
-    DOWN    : 2
-    LEFT    : 3
-    */
+/**********
+*Fonctions*
+***********/
+
+//Cache le bonhomme et crée une trainé de couleur
+function disablePac(id){
+    id_img = 'img_'+id;
+    document.getElementById(id_img).style.display ="none";
+
+}
+//Affiche le bonhomme
+function activatePac(id){
+    id_img = 'img_'+id;
+    document.getElementById(id_img).style.display="block";
+}
+
 //Verifie si l'on peux bouger
 function canMove(positionActuelle, direction) {
     var nextCell = getNextCell(positionActuelle, direction);//On recupere la prochaine cellule.
@@ -120,6 +143,7 @@ function testVictoire(){
     }
 }
 
+//Retourne le numero de la cellule suivante
 function getNextCell(currentCell,direction){
     switch(direction) {
         case 0:
@@ -138,6 +162,7 @@ function getNextCell(currentCell,direction){
     return nextCell;
 }
 
+//Retourne le numero de la cellule suivante et déplace le bonhomme
 function getNextCellAndMove(currentCell,direction){
     switch(direction) {
         case 0:
@@ -166,9 +191,7 @@ function resolveMaze(){
 
 }
 
-//Contient toute les cases visitée/traité
-var tabVisite = Array();
-
+//Fonction qui parcours le tableau lors de la résolution du labyrinthe
 function tryMaze(startCell) {
 
     //On verifi que l'on a bien passé une cellule en parametre.
@@ -207,17 +230,22 @@ function reinit(){
     position=positionFixe;
 }
 
-function traceRoad(chemin_parcouru,class_name) {
-    if( class_name == undefined)
-        class_name = "color";
+//Trace la route (tableau) passé en parametre 
+function traceRoad(chemin_parcouru,color) {
+    if( color == undefined)
+        color = "color";
     //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
         for(var y=0;y<chemin_parcouru.length-1;y++){
             element = document.getElementById(chemin_parcouru[y]);
             styleCell = element.className;
-            styleCell = styleCell+" "+class_name;
+            styleCell = styleCell+" "+color;
             element.setAttribute("class", styleCell);
         }
 }
+
+/*******************
+*Fonctions ajoutées*
+********************/
 
 //Fonction in_array() php
 Array.prototype.inArray = function (value) {

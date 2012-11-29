@@ -1,26 +1,46 @@
 <?php
 /*
-    les différents état du Maze : 
-        Pour les authorisation :
+    Description du tabelau maze :
+        maze[cell]['auth'][0|1|2|3]=authorisation
+                  ['wall'][0|1|2|3]=murs
+                  ['etat'][0|1|2]=états
+                  
+    Les directions : 
+            0 = Nord
+            1 = Est
+            2 = Sud
+            3 = Ouest
+                  
+    Les différents état du Maze : 
+        Pour les authorisation 'auth' :
             0 = non authorisé
             1 = Authorisé
             
-        Pour les murs : 
+        Pour les murs           'wall': 
             0 = pas de mur
             1 = mur
             
-        Pour les passages :
+        Pour les états          'etat':
             0 = Non visité
             1 = en cours (restera en 'en cours' temps qu'il y aura des cellules a l'état '0')
             2 = construite (Toutes les cellules voisines sont construite alors on passe a la prochaine 'en cours' et on pass ela cellule actuel en construite).
 */
 class maze{
+
+    /**********
+    *Variables*
+    ***********/
+    
     var $line;
     var $column;
     var $maze=array();
     var $start_cell;
     var $random_end;
     var $chemin_parcourus = array();//on instancie un array qui contiendra le chemin parcourus.
+    
+    /*************
+    *Constructeur*
+    **************/
     
     //Constructue de l'objet Maze. On passe en parametre le nombre de ligne et de colonne que nous voulons.
     public function maze($x,$y) {
@@ -63,35 +83,49 @@ class maze{
         $this->random_end = rand(0, $this->column-1);//on random la sortie du maze sur la premiere ligne.
         $this->maze[$this->random_end]['wall'][0] = 0;//on ouvre le mur éxtérieure de la sortie
      }
-     
-     public function getMazeArray(){
+    
+    /********
+    *GET/SET*
+    *********/
+    
+    //Retourne l'objet maze en tableau
+    public function getMazeArray(){
          return ($this->maze);
      }
-     
-     public function getNbCells(){
+    
+    //Retourne le nombre de cellules
+    public function getNbCells(){
         return (($this->line)*($this->column));
      }
-     
-     public function getStartCell(){
+    
+    //Retourne la cellule de départ
+    public function getStartCell(){
          return $this->start_cell;
      }
-     
-     public function getNbColumn(){
+    
+    //Retroune le nombre de collone
+    public function getNbColumn(){
          return $this->column;
      }
-     
-     public function toString(){
+    
+    //Retourne la cellule d'arrivé
+    public function getCellEnd(){
+         return ($this->random_end);
+     }
+    
+     //Print_r le tableau maze
+    public function toString(){
          echo("<pre>");
          print_r($this->maze);
          echo("</pre>");
      }
-     
-     public function getCellEnd(){
-         return ($this->random_end);
-     }
-     
-     //Construction du tableau javascript à partir des données du tableau PHP
-     public function convertPhpToJavascript($maze){
+    
+    /**********
+    *Fonctions*
+    ***********/
+    
+    //Construction du tableau javascript à partir des données du tableau PHP
+    public function convertPhpToJavascript($maze){
          $nbCell = $maze->getNbCells();
          $startCell = $maze->getStartCell();
          $nbColumn = $maze->getNbColumn();
@@ -128,9 +162,9 @@ class maze{
             }
         echo '</script>';
      }
-        
-     
-     public function render($maze){
+    
+    //Crée l'affichage du maze
+    public function render($maze){
         $column = $maze->getNbColumn();
         $nbCell = $maze->getNbCells();
         
@@ -173,8 +207,9 @@ class maze{
             }
         }
      }
-     
-     public function buildMaze($start_cell){
+    
+    //Construit le labyrinthe
+    public function buildMaze($start_cell){
          //On commence de la cellule de départ
          $cell_auth=array(); //Tableau qui contiendra toutes les directions disponibles.
          foreach($this->maze[$start_cell]['auth'] as $key=>$value){
