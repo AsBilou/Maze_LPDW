@@ -50,7 +50,8 @@ $maze->buildMaze($start_cell);
         <script  type="text/javascript" src="plugin/jquery.js"></script>
         <!-- Gestion déplacement -->
         <script  type="text/javascript" src="deplacement.js"></script>
-        <h3>Utilisez z,s,q,d pour vous déplacer.</h6>
+        <h3>Utilisez 'z','s','q','d' pour vous déplacer. </h3>
+        <h3>'r' pour résoudre le labyrinthe.</h4>
         <h6>changer la taille du tableau</h6>
         <form accept="index.php" method="post">
             <label for="line">Ligne</label>

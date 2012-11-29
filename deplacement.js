@@ -42,6 +42,9 @@ $(document).keydown(function(e){
     if((nom == 39)||(nom == 68)){
         rightPacman();
     }
+    if(nom == 82){
+        resolveMaze();
+    }
 });
 
 /**********
