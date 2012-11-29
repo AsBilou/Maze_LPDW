@@ -6,14 +6,14 @@ include('functions.php');
 if((isset($_POST['column']))&&(is_numeric($_POST['column']))){
     $column = $_POST['column'];
 }else{
-    $column =15;
+    $column =20;
 }
 
 //Nombre de case en Y
 if((isset($_POST['line']))&&(is_numeric($_POST['line']))){
     $line = $_POST['line'];
 }else{
-    $line = 15;
+    $line = 20;
 }
 
 

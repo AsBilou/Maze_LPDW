@@ -39,13 +39,13 @@ function touche(e){
     DOWN    : 2
     LEFT    : 3
     */
-function canMove(positionActuelle, direction)
-{
-    var next = getNextCell(positionActuelle, direction);
-    if(next < 0 || next >= (nbCell))
+//Verifie si l'on peux bouger
+function canMove(positionActuelle, direction) {
+    var nextCell = getNextCell(positionActuelle, direction);//On recupere la prochaine cellule.
+    if(nextCell < 0 || nextCell >= (nbCell))//Si elle sort du labyrinthe on bloque le déplacement.
         return false;
     
-    if(maze[positionActuelle]!= undefined)
+    if(maze[positionActuelle]!= undefined)//Et si la cellule existe alors on authorise le déplacement.
         return !maze[positionActuelle][direction];
     else
         return false;
@@ -115,7 +115,6 @@ function rightPacman(){
 function testVictoire(){
     if(position==cellEnd)
     {
-        //alert("Gagné !");
         return true;
     }
     else{
@@ -160,9 +159,18 @@ function getNextCellAndMove(currentCell,direction){
     }
     return nextCell;
 }
-//Contient toute les case visitée/traité
-var tabVisite = Array();
+
 //resolution du maze automatiquement
+function resolveMaze(){
+    tryMaze(positionFixe);
+    traceRoad(chemin_parcouru,"color2");
+    traceRoad(tabVisite);
+
+}
+
+//Contient toute les cases visitée/traité
+var tabVisite = Array();
+
 function tryMaze(startCell) {
     //recuperer la cellule actuel
     
@@ -198,28 +206,6 @@ function tryMaze(startCell) {
             }
         }
     }
-    
-    return -1; // Cul de sac
-}
-
-function resolveMaze(){
-    var tryAgain = 0; 
-    var status=0;
-    var beginCell;
-    var nbEssai=0;
-    while(tryAgain==0){
-        beginCell = positionFixe;
-        status=tryMaze(beginCell);
-        if(status==1){
-            //alert('passage a 1');
-            tryAgain=1;
-        }
-        nbEssai++;
-    }
-    alert("Nombre d'essai : "+nbEssai);
-    traceRoad(chemin_parcouru,"color2");
-    traceRoad(tabVisite);
-
 }
 
 //réinitialise la résolution du maze
