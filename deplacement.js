@@ -172,33 +172,25 @@ function resolveMaze(){
 var tabVisite = Array();
 
 function tryMaze(startCell) {
-    //recuperer la cellule actuel
-    
-    //recuperer les cellule accésible
-    
-        
+
+    //On verifi que l'on a bien passé une cellule en parametre.
     if(startCell == undefined)
         return -1;
-    //var cellulesAdjacentes;
+    //On met la cellule dans le tableau des cellules visité. 
     tabVisite.push(startCell);
     //On test toute les direction en commencant par le haut
     for(var i=0;i<4;i++) {
-        if(canMove(startCell,i)) // Si il n'y a pas de mur
-        {
+        if(canMove(startCell,i)) {// Si il n'y a pas de mur
             var celluleCible = getNextCell(startCell,i);
             if(celluleCible == undefined)
                 continue;
-            if(!tabVisite.inArray(celluleCible)) // On a pas encore visiter la case
-            {
-                if(celluleCible == cellEnd)
-                {
+            if(!tabVisite.inArray(celluleCible)){ // On a pas encore visiter la case
+                if(celluleCible == cellEnd) {
                     chemin_parcouru.push(startCell);
                     return 1;
                 }
-                else
-                {
-                    if(tryMaze(celluleCible) == 1) // si la cellule est celle trouvée 
-                    {
+                else {
+                    if(tryMaze(celluleCible) == 1) {// si la cellule est celle trouvée 
                         chemin_parcouru.push(startCell);
                         return 1
                     }
@@ -227,14 +219,6 @@ function traceRoad(chemin_parcouru,class_name) {
             styleCell = styleCell+" "+class_name;
             element.setAttribute("class", styleCell);
         }
-}
-
-function colorCell(currentCell) {
-    //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
-            element = document.getElementById(currentCell);
-            styleCell = element.className;
-            styleCell = styleCell+" color"
-            element.setAttribute("class", styleCell);
 }
 
 //Fonction in_array() php
