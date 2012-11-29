@@ -162,19 +162,19 @@ table td {
 }
 
 .border_top{
-    border-top:1px solid black;
+    border-top:2px solid black;
 }
 
 .border_bottom{
-    border-bottom:1px solid black;
+    border-bottom:2px solid black;
 }
 
 .border_left{
-    border-left:1px solid black;
+    border-left:2px solid black;
 }
 
 .border_right{
-    border-right:1px solid black;
+    border-right:2px solid black;
 }
 
 .disable{
@@ -186,7 +186,7 @@ table td {
 }
 
 .color {
-    background-color: rgba(255,175,69,1);
+    background-color: rgb(255,175,69);
 }
 .color2 {
     background-color: #5FB404;
