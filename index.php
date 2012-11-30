@@ -3,14 +3,14 @@ include('functions.php');
 
 //Nombre de colonne (par defaut 20)
 if((isset($_POST['column']))&&(is_numeric($_POST['column']))){
-    $column = $_POST['column'];
+    $column = htmlspecialchars($_POST['column']);
 }else{
-    $column =20;
+    $column = 20;
 }
 
 //Nombre de ligne (par defaut 20)
 if((isset($_POST['line']))&&(is_numeric($_POST['line']))){
-    $line = $_POST['line'];
+    $line = htmlspecialchars($_POST['line']);
 }else{
     $line = 20;
 }
@@ -18,9 +18,9 @@ if((isset($_POST['line']))&&(is_numeric($_POST['line']))){
 //Création d'un nouvel objet Maze
 $maze = new Maze($line,$column);
 //Récuperation de la cellule de départ
-$start_cell_rand = rand ( 0 , $maze->getNbCells() );
+$start_cell = rand ( 0 , $maze->getNbCells() );
 //Début de la création du labyrithe
-$maze->buildMaze($start_cell_rand);
+$maze->buildMaze($start_cell);
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +28,9 @@ $maze->buildMaze($start_cell_rand);
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" media="screen" href="bootstrap.css">
-        <title>Maze 3000</title>
+        <link rel="stylesheet" media="screen" href="style.css">
+        <title>The Amazing Maze | A maze generator</title>
+        <link rel="icon" type="image/png" href="img/favicon.png" />
         <!-- Conversion du tableau maze php en tabeau javascript avec filtre des données. -->
         <?php $maze->convertPhpToJavascript($maze); ?>
         <!-- Google Analytics -->
@@ -46,51 +47,55 @@ $maze->buildMaze($start_cell_rand);
         </script>
     </head>
     <body>
-        <!-- Plugin jQuery -->
-        <script  type="text/javascript" src="plugin/jquery.js"></script>
-        <!-- Gestion déplacement -->
-        <script  type="text/javascript" src="deplacement.js"></script>
-        <h3>Utilisez 'z','s','q','d' pour vous déplacer. </h3>
-        <h3>'r' pour résoudre le labyrinthe.</h4>
-        <h6>changer la taille du tableau</h6>
-        <form accept="index.php" method="post">
-            <label for="line">Ligne</label>
-            <textarea id="line" name="line"></textarea>
-            <label for="column">Colonne</label>
-            <textarea id="column" name="column"></textarea>
-            <button type="submit">Générer</button>
-        </form>
-        <button type="submit" onclick="resolveMaze();">Resolve</button>
-        <!-- Affichage du labyrinthe -->
-        <table class="maze">
-            <?php
-            $maze->render($maze);
-            ?>
-        </table>
-        <!-- Affichage des controles -->
-        <table class="controls">
-            <tbody>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <button type="submit" onclick="upPacman()">UP</button>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit" onclick="leftPacman()">LEFT</button>
-                    </td>
-                    <td>
-                        <button type="submit" onclick="downPacman()">DOWN</button>
-                    </td>
-                    <td>
-                        <button type="submit" onclick="rightPacman()">RIGHT</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    
+        <script  type="text/javascript" src="plugin/jquery.js"></script> <!-- Plugin jQuery -->
+        <script  type="text/javascript" src="deplacement.js"></script>   <!-- Gestion déplacement -->
+        
+        <aside id="control">
+            <a href="#"><img src="img/the-amazing-maze.png" width="385" height="209" alt="The Amazing Maze"/></a>
+            <form accept="index.php" method="post">
+                <label for="line">Width</label>
+                <label for="column">Height</label>
+                <br/>                
+                <input type="text" maxlength="3" id="column" name="column" value="<?php echo $column; ?>" autocomplete="off"/>
+                <input type="text" maxlength="3" id="line" name="line" value="<?php echo $line; ?>" autocomplete="off"/>
+                <button type="submit">Generate</button>
+            </form>
+            <p class="moves"><span class="moves">MOVES :</span> Z Q S D <span class="moves">/</span> Arrow keys</p>            
+            <!-- Affichage des controles -->
+            <table class="controls">
+                <tbody>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <button type="submit" onclick="upPacman()">UP</button>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" onclick="leftPacman()">LEFT</button>
+                        </td>
+                        <td>
+                            <button type="submit" onclick="downPacman()">DOWN</button>
+                        </td>
+                        <td>
+                            <button type="submit" onclick="rightPacman()">RIGHT</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a id="bigRedButton" href="#" onclick="resolveMaze();"></a>
+            <p>Don't push this big<br/><span>red button!</span></p>
+        </aside>
+        
+        <section id="mazeContainer">            
+            <!-- Affichage du labyrinthe -->
+            <table class="maze" style="min-width:<?php echo $column*27.1 ?>px;">
+                <?php $maze->render($maze); ?>
+            </table>
+        </section>
     </body>
 </html>
