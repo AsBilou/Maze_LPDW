@@ -18,9 +18,9 @@ if((isset($_POST['line']))&&(is_numeric($_POST['line']))){
 //Création d'un nouvel objet Maze
 $maze = new Maze($line,$column);
 //Récuperation de la cellule de départ
-$start_cell = $maze->getStartCell();
+$start_cell_rand = rand ( 0 , $maze->getNbCells() );
 //Début de la création du labyrithe
-$maze->buildMaze($start_cell);
+$maze->buildMaze($start_cell_rand);
 ?>
 
 <!DOCTYPE html>

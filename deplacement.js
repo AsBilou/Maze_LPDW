@@ -191,7 +191,6 @@ function resolveMaze(){
     tryMaze(positionFixe);
     traceRoad(chemin_parcouru,"color2");
     traceRoad(tabVisite);
-
 }
 
 //Fonction qui parcours le tableau lors de la résolution du labyrinthe
