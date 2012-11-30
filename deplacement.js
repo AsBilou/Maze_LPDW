@@ -190,8 +190,8 @@ function getNextCellAndMove(currentCell,direction){
 function resolveMaze(){
     //tryMaze(positionFixe);
     tryMazeNonRecur(positionFixe);
-	traceRoad(chemin_parcouru,"color2");
-    traceRoad(tabVisite);
+    traceRoad(chemin_parcouru,"color2");
+    //traceRoad(tabVisite);
 }
 
 //Fonction qui parcours le tableau lors de la résolution du labyrinthe
@@ -231,41 +231,41 @@ function tryMazeNonRecur(startCell) {
     //On verifi que l'on a bien passé une cellule en parametre.
     if(startCell == undefined)
         return -1;
-		
-	// On met la case dans le chemin pour pouvoir ensuite reculer
-	chemin_actuel.push(startCell)
+        
+    // On met la case dans le chemin pour pouvoir ensuite reculer
+    chemin_actuel.push(startCell)
     //On met la cellule dans le tableau des cellules visité. (statistiques )
     tabVisite.push(startCell);
    
-	var celluleTeste = startCell; // On commence sur la case de début
-	while(celluleTeste != cellEnd) // jusqu'a la fin (on trouve la sortie)
-	{
-		var b_FindWay = false; // Flag si on ne trouve pas de sortie 
-		 //On test toute les direction en commencant par le haut
-		for(var i=0;i<4;i++) {
-			if(canMove(celluleTeste,i)) {// Si il n'y a pas de mur
-				var celluleCible = getNextCell(celluleTeste,i);
-				if(celluleCible == undefined)
-					continue;
-				if(!tabVisite.inArray(celluleCible)){ // On a pas encore visiter la case
-					tabVisite.push(celluleCible);
-					chemin_actuel.push(celluleCible);
-					// On visite la case 
-					celluleTeste = celluleCible;
-					b_FindWay = true; // On a trouver une sortie
-						break; // Force la sortie pour la case d'apres
-				}
-			}			
-		} 
-		if(!b_FindWay) // Si on a rien trouver
-		{	
-			// Sortie de la boucle, on ne peut pas bouger 
-			chemin_actuel.unset(celluleTeste); // On supprime la salle de la liste du chemin final
-			celluleTeste = chemin_actuel[chemin_actuel.length-1]; // On reprends a la salle d'avant
-		}
-	}
-	chemin_parcouru = chemin_actuel;
-	return 1;
+    var celluleTeste = startCell; // On commence sur la case de début
+    while(celluleTeste != cellEnd) // jusqu'a la fin (on trouve la sortie)
+    {
+        var b_FindWay = false; // Flag si on ne trouve pas de sortie 
+         //On test toute les direction en commencant par le haut
+        for(var i=0;i<4;i++) {
+            if(canMove(celluleTeste,i)) {// Si il n'y a pas de mur
+                var celluleCible = getNextCell(celluleTeste,i);
+                if(celluleCible == undefined)
+                    continue;
+                if(!tabVisite.inArray(celluleCible)){ // On a pas encore visiter la case
+                    tabVisite.push(celluleCible);
+                    chemin_actuel.push(celluleCible);
+                    // On visite la case 
+                    celluleTeste = celluleCible;
+                    b_FindWay = true; // On a trouver une sortie
+                        break; // Force la sortie pour la case d'apres
+                }
+            }
+        } 
+        if(!b_FindWay) // Si on a rien trouver
+        {   
+            // Sortie de la boucle, on ne peut pas bouger 
+            chemin_actuel.unset(celluleTeste); // On supprime la salle de la liste du chemin final
+            celluleTeste = chemin_actuel[chemin_actuel.length-1]; // On reprends a la salle d'avant
+        }
+    }
+    chemin_parcouru = chemin_actuel;
+    return 1;
 }
 
 //réinitialise la résolution du maze

@@ -57,7 +57,7 @@ body {
     font-size: 20px;
     line-height: 20px;
     color: #661915;
-    background-color: #e8692e;
+    background-color: #e7692b;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -269,7 +269,7 @@ section#mazeContainer{
 }
 
 .color {
-    /*background-color: #ff8c56;*/
+    background-color: #ff8c56;
 }
 .color2 {
     background-color: #c9371a;
