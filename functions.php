@@ -201,7 +201,7 @@ class maze{
             //Si la cellule en cours est la cellule de départ, alors on affiche le personnage.
             $status=($this->start_cell==$i?'':'disable');
             echo($status);
-            echo'" src="img/Cat" /></td>';
+            echo'" src="img/bumb.gif" /></td>';
             if(($i % $column) == ($column-1)){
                 echo '</tr>';
             }
