@@ -22,6 +22,8 @@
 var chemin_parcouru = Array();
 //Contient toute les cases visitée/traité
 var tabVisite = Array();
+//Contient le chemin que l'on parcours pendant le test
+var chemin_actuel = Array();
 
 /*********
 *Listener*
@@ -69,6 +71,7 @@ $(document).keydown(function(e){
     }
 });
 
+//Fonction appeler lors du relachement d'une touche
 $(document).keyup(function(e){
     nom = e.keyCode;
     if((nom == 38)||(nom == 90)){
@@ -268,8 +271,6 @@ function tryMaze(startCell) {
     }
 }
 
-//Contient le chemin que l'on parcours pendant le test
-var chemin_actuel = Array();
 function tryMazeNonRecur(startCell) {
 
     //On verifi que l'on a bien passé une cellule en parametre.
