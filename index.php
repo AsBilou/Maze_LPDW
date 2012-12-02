@@ -1,11 +1,12 @@
 <?php
-include('functions.php');
+include('maze.php');
+include('fonction.php');
 
 //max=14161
 if((isset($_POST['line']))&&(isset($_POST['column']))){
     $line = $_POST['line'];
     $column = $_POST['column'];
-    if(($column*$line)<=14161){
+    if((($column*$line)<=14161)&&(($column*$line)>=100)){
         //Nombre de colonne (par defaut 20)
         if(is_numeric($column)){
             $column = htmlspecialchars($column);
@@ -21,7 +22,7 @@ if((isset($_POST['line']))&&(isset($_POST['column']))){
     }else{
         $line = 20;
         $column = 20;
-        echo 'Trop grand!!';
+        echo 'Taille incorecte';
     }
 }else{
     $line = 20;
