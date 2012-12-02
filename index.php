@@ -1,25 +1,38 @@
 <?php
 include('functions.php');
 
-//Nombre de colonne (par defaut 20)
-if((isset($_POST['column']))&&(is_numeric($_POST['column']))){
-    $column = htmlspecialchars($_POST['column']);
-}else{
-    $column = 20;
-}
-
-//Nombre de ligne (par defaut 20)
-if((isset($_POST['line']))&&(is_numeric($_POST['line']))){
-    $line = htmlspecialchars($_POST['line']);
+//max=14161
+if((isset($_POST['line']))&&(isset($_POST['column']))){
+    $line = $_POST['line'];
+    $column = $_POST['column'];
+    if(($column*$line)<=14161){
+        //Nombre de colonne (par defaut 20)
+        if(is_numeric($column)){
+            $column = htmlspecialchars($column);
+        }else{
+            $column = 20;
+        }
+        //Nombre de ligne (par defaut 20)
+        if(is_numeric($line)){
+            $line = htmlspecialchars($line);
+        }else{
+            $line = 20;
+        }
+    }else{
+        $line = 20;
+        $column = 20;
+        echo 'Trop grand!!';
+    }
 }else{
     $line = 20;
+    $column = 20;
 }
 
 //Création d'un nouvel objet Maze
 $maze = new Maze($line,$column);
 //Récuperation de la cellule de départ
 $start_cell = rand ( 0 , $maze->getNbCells() );
-//Début de la création du labyrithe
+//Début de la création du labyrinthe
 $maze->buildMaze($start_cell);
 ?>
 
@@ -52,43 +65,27 @@ $maze->buildMaze($start_cell);
         <script  type="text/javascript" src="deplacement.js"></script>   <!-- Gestion déplacement -->
         
         <aside id="control">
-            <a href="#"><img src="img/the-amazing-maze.png" width="385" height="209" alt="The Amazing Maze"/></a>
+            <a href="index.php"><img src="img/the-amazing-maze.png" width="385" height="209" alt="The Amazing Maze"/></a>
             <form accept="index.php" method="post">
                 <label for="line">Width</label>
                 <label for="column">Height</label>
                 <br/>                
                 <input type="text" maxlength="3" id="column" name="column" value="<?php echo $column; ?>" autocomplete="off"/>
                 <input type="text" maxlength="3" id="line" name="line" value="<?php echo $line; ?>" autocomplete="off"/>
-                <button type="submit">Generate</button>
+                <button type="submit">Generate <span>(G)</span></button>
             </form>
+            <div id="messageBox"><span class="big">Seriously?</span><br/>Even my goldfish can solve a maze of this size.<br/><span>(Insert numbers biggers than 4.)</span></div>
             <p class="moves"><span class="moves">MOVES :</span> Z Q S D <span class="moves">/</span> Arrow keys</p>            
             <!-- Affichage des controles -->
-            <table class="controls">
-                <tbody>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <button type="submit" onclick="upPacman()">UP</button>
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button type="submit" onclick="leftPacman()">LEFT</button>
-                        </td>
-                        <td>
-                            <button type="submit" onclick="downPacman()">DOWN</button>
-                        </td>
-                        <td>
-                            <button type="submit" onclick="rightPacman()">RIGHT</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <a id="bigRedButton" href="#" onclick="resolveMaze();"></a>
-            <p>Don't push this big<br/><span>red button!</span></p>
+            <div id="controls">
+                <a id="btnLEFT" onclick="leftPacman()"></a>
+                <a id="btnUP" onclick="upPacman()"></a>
+                <a id="btnDOWN" onclick="downPacman()"></a>
+                <a id="btnRIGHT" onclick="rightPacman()"></a>
+                <div class="clear"></div>
+            </div>
+            <a id="bigRedButton" onclick="resolveMaze();"></a>
+            <p id="alertTxt">Don't push this big<br/><span>red button!</span><br/><span id="alertKey">(or R key)</span></p>
         </aside>
         
         <section id="mazeContainer">            

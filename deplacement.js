@@ -32,18 +32,62 @@ $(document).keydown(function(e){
     nom = e.keyCode;
     if((nom == 38)||(nom == 90)){
         upPacman();
+        $("#controls a#btnUP").css("background-position","-54px -220px");
     }
     if((nom == 40)||(nom == 83)){
         downPacman();
+        $("#controls a#btnDOWN").css("background-position","-51px -277px");
     }
     if((nom == 37)||(nom == 81)){
         leftPacman();
+        $("#controls a#btnLEFT").css("background-position","-4px -250px");
     }
     if((nom == 39)||(nom == 68)){
         rightPacman();
+        $("#controls a#btnRIGHT").css("background-position","-95px -250px");
     }
     if(nom == 82){
         resolveMaze();
+        $("#bigRedButton").css("background-position","center -254px");
+    }
+    //Pas assez stable pour le moment pour etre implenté.
+    if(nom == 71){
+       /*
+        var column = $("#column").attr("value");
+       var line   = $("#line").attr("value");
+        $.ajax({
+            type:"POST",
+            data:"&column="+column+"&line="+line,
+            url:"ajax.php",
+            dataType:"html",
+            success:function(data){			
+                var html	= data;
+                $(".maze").html(html);
+            }
+        });*/
+        $("aside#control form button").css({"margin-top":"1px","box-shadow":"0px 1px 0px 0px rgba(109, 33, 9, 1)"});
+    }
+});
+
+$(document).keyup(function(e){
+    nom = e.keyCode;
+    if((nom == 38)||(nom == 90)){
+        $("#controls a#btnUP").css("background-position","-54px 1px");
+    }
+    if((nom == 40)||(nom == 83)){
+        $("#controls a#btnDOWN").css("background-position","-51px -56px");        
+    }
+    if((nom == 37)||(nom == 81)){
+        $("#controls a#btnLEFT").css("background-position","-4px -29px");
+    }
+    if((nom == 39)||(nom == 68)){
+        $("#controls a#btnRIGHT").css("background-position","-95px -29px");
+    }
+    if(nom == 82){
+        $("#bigRedButton").css("background-position","center -18px");
+    }
+    if(nom == 71){
+        $("aside#control form button").css({"margin-top":"-1px","box-shadow":"0px 3px 0px 0px rgba(109, 33, 9, 1)"});
     }
 });
 
@@ -283,10 +327,13 @@ function traceRoad(chemin_parcouru,color) {
         color = "color";
     //Pour chaque element dans le tableau 'chemin_trace' colorer la case.
         for(var y=0;y<chemin_parcouru.length-1;y++){
-            element = document.getElementById(chemin_parcouru[y]);
-            styleCell = element.className;
+            elementRoad = document.getElementById(chemin_parcouru[y]);
+            id = 'img_'+chemin_parcouru[y];
+            elementPicture = document.getElementById(id);
+            elementPicture.src="img/bumb2.gif";
+            styleCell = elementRoad.className;
             styleCell = styleCell+" "+color;
-            element.setAttribute("class", styleCell);
+            elementRoad.setAttribute("class", styleCell);
         }
 }
 

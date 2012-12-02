@@ -68,6 +68,9 @@ h1,h2,h3,h4,h5,h6 {
     color: inherit;
     text-rendering: optimizelegibility;
 }
+a{
+    cursor:pointer;
+}
 
 code,pre {
     padding: 0 3px 2px;
@@ -115,6 +118,11 @@ table td {
     height: 25px;
 }
 
+.clear{
+    clear:both;
+    height:0;
+}
+
 aside#control{
     width: 307px;
     height: 100%;
@@ -145,7 +153,7 @@ aside#control label{
     line-height: 37px;
 }
 aside#control label:first-child{
-    margin: 0 35px 0 -131px;
+    margin: 0 35px 0 -143px;
 }
 
 aside#control p span.moves{
@@ -175,7 +183,7 @@ aside#control a#bigRedButton:active{
 aside#control form button{
     border:0;
     color:#ffe9e8;
-    padding:11px 28px;
+    padding: 11px 22px 11px 28px;
     text-transform:uppercase;
     font-size: 21px;
     position: absolute;
@@ -198,6 +206,10 @@ aside#control form button{
     background: -ms-linear-gradient(top,  #e95020 0%,#d14218 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #e95020 0%,#d14218 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e95020', endColorstr='#d14218',GradientType=0 ); /* IE6-9 */
+}
+aside#control form button span{
+    color:#661915;
+    font-size: 18px;
 }
 aside#control form button:hover{
     background: #e93d20; /* Old browsers */
@@ -236,14 +248,75 @@ aside#control input{
     font-size: 23px;
 }
 aside#control input#column{
-    margin-left: -127px;
+    margin-left: -138px;
 }
 
 section#mazeContainer{
     margin-left:397px;
     padding:45px;
 }
+#controls a{
+    display:block;
+    width:50px;
+    height:50px;
+    float:left;
+    background-image:url(img/arrows.png);
+    background-repeat:no-repeat;
+}
+#controls a#btnUP{
+    background-position: -54px 1px;
+    height: 40px;
+    width: 38px;
+}
+#controls a#btnUP:hover{
+    background-position: -54px -111px;
+}
+#controls a#btnUP:active{
+    background-position: -54px -220px;
+}
 
+#controls a#btnRIGHT{
+    background-position: -95px -29px;
+    height: 42px;
+    width: 50px;
+    margin-top: 29px;
+    margin-left: -3px;
+}
+#controls a#btnRIGHT:hover{
+    background-position: -95px -141px;
+}
+#controls a#btnRIGHT:active{
+    background-position: -95px -250px;
+}
+#controls a#btnDOWN{
+    background-position: -51px -56px;
+    height: 53px;
+    width: 43px;
+    margin-left: -41px;
+    margin-top: 59px;
+}
+#controls a#btnDOWN:hover{
+    background-position: -51px -168px;
+}
+#controls a#btnDOWN:active{
+    background-position: -51px -277px;
+}
+#controls a#btnLEFT{
+    background-position: -4px -29px;
+    height: 41px;
+    width: 47px;
+    margin-top: 29px;
+}
+#controls a#btnLEFT:hover{
+    background-position: -4px -141px;
+}
+#controls a#btnLEFT:active{
+    background-position: -4px -250px;
+}
+#controls{
+    margin: 32px auto;
+    width: 135px;
+}
 .border_top{
     border-top:2px solid #f3bc9f;
 }
@@ -277,7 +350,7 @@ section#mazeContainer{
 
 .colorStart {
 	background-image: url(img/start.png);
-    background-position:center center;
+    background-position:center 1px;
     background-repeat:no-repeat;
 }
 
@@ -285,4 +358,47 @@ section#mazeContainer{
     background-image: url(img/exit.png);
     background-position:center center;
     background-repeat:no-repeat;
+}
+#alertTxt{
+    font-size:28px;
+}
+#alertTxt span{
+    font-family:AgencyFBbold;
+    font-size: 35px;
+    line-height: 50px;
+    text-transform: uppercase;
+}
+#alertTxt #alertKey{
+    font-size:20px;
+    text-transform:none;
+    line-height: 9px;
+    font-family:AgencyFBregular;
+    margin-top: 3px;
+    display: block;
+}
+#messageBox{
+    display:none;
+    border: 1px solid #FF834B;
+    font-size: 22px;
+    line-height: 24px;
+    padding: 18px;
+    text-align: left;
+    margin: -14px 0 30px 0;
+    
+    background: #ff8149; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ff8149 0%, #f46f33 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff8149), color-stop(100%,#f46f33)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ff8149 0%,#f46f33 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ff8149 0%,#f46f33 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ff8149 0%,#f46f33 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ff8149 0%,#f46f33 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8149', endColorstr='#f46f33',GradientType=0 ); /* IE6-9 */
+}
+#messageBox span{
+    font-family:helvetica,arial,sans-serif;
+    font-size:14px;
+}
+#messageBox span.big{
+    font-family:AgencyFBbold;
+    font-size:22px;
 }
