@@ -76,7 +76,8 @@ $maze->buildMaze($start_cell);
                 <button type="submit">Generate <span>(G)</span></button>
             </form>
             <div id="messageBox"><span class="big">Seriously?</span><br/>Even my goldfish can solve a maze of this size.<br/><span>(Insert numbers biggers than 4.)</span></div>
-            <p class="moves"><span class="moves">MOVES :</span> Z Q S D <span class="moves">/</span> Arrow keys</p>            
+            <p class="moves"><span class="moves">MOVES :</span> Z S Q D <span class="moves">/</span> Arrow keys</p>
+            <p class="moves"><span class="moves">MOVES :</span> W S A D <span class="moves">/</span> Arrow keys</p>
             <!-- Affichage des controles -->
             <div id="controls">
                 <a id="btnLEFT" onclick="leftPacman()"></a>

@@ -32,7 +32,8 @@ var chemin_actuel = Array();
 //Fonction appeler lors de l'appui d'une touche
 $(document).keydown(function(e){
     nom = e.keyCode;
-    if((nom == 38)||(nom == 90)){
+    console.log(nom);
+    if((nom == 38)||(nom == 90)||(nom == 87)){
         upPacman();
         $("#controls a#btnUP").css("background-position","-54px -220px");
     }
@@ -40,7 +41,7 @@ $(document).keydown(function(e){
         downPacman();
         $("#controls a#btnDOWN").css("background-position","-51px -277px");
     }
-    if((nom == 37)||(nom == 81)){
+    if((nom == 37)||(nom == 81)||(nom == 65)){
         leftPacman();
         $("#controls a#btnLEFT").css("background-position","-4px -250px");
     }
