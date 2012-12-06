@@ -55,23 +55,6 @@ $(document).keydown(function(e){
         resolveMaze();
         $("#bigRedButton").addClass("press-redButton");
     }
-    //Pas assez stable pour le moment pour etre implenté.
-    if(nom == 71){
-       /*
-        var column = $("#column").attr("value");
-       var line   = $("#line").attr("value");
-        $.ajax({
-            type:"POST",
-            data:"&column="+column+"&line="+line,
-            url:"ajax.php",
-            dataType:"html",
-            success:function(data){			
-                var html	= data;
-                $(".maze").html(html);
-            }
-        });*/
-        $("aside#control form button").addClass("press-genButton");
-    }
 });
 
 //Fonction appeler lors du relachement d'une touche
