@@ -26,7 +26,7 @@ Cette classe est constitué d'attributs et de méthodes :
 
 
     Attributs : 
-    ---------
+    ===========
     
     - line : Nombre de lignes dans le labyrinthe.
     - column : Nombre de colonne dans le labyrinthe.
@@ -37,7 +37,7 @@ Cette classe est constitué d'attributs et de méthodes :
     
     
     Méthodes : 
-    ----------
+    ==========
     
     maze($x,$y) : Constructeur de la classe. Elle prend en parametre le nombre de ligne et de colonne pour créer un tableau non construit.
     buildMaze($ramdom_start_cell) : Fonction qui permet de creuser le labyrinthe dans le tableau générer par le constructeur.
@@ -46,7 +46,7 @@ Cette classe est constitué d'attributs et de méthodes :
     
     
     Assesseur/Mutateur :
-    --------------------
+    ====================
     
     getMazeArray() : Retourne le tableau contenant les informations du labyrinthe.
     getNbCells() : Retourne le nombre de cellule dans le labyrinthe.
@@ -56,3 +56,19 @@ Cette classe est constitué d'attributs et de méthodes :
     toString() : Affiche le contenu du tabelau maze.
 
 
+Résolution
+==========
+
+La résolution du labyrinthe ce passe coté client. Le langage utilisé est le JavaScript. 
+Les fonctions permetant de gérer la résolution ce trouve dans le fichier "deplacement.js".
+L'algorithme de résolution est un dérivé de l'algo de génération du maze. Il a été adapté pour enlever le recursif, qui est limité dans les navigateurs internet, et ne choisi plus aléatoirement sa direction mais maintenant commencera toujours par tester la case au dessus de lui, puis celle de droite, celle du bas et finalement celle de gauche.
+Si jamais l'algorithme tombe dans un cul de sac, il retournera directement au dernière endrois qui dispose d'un nouveu choix de direction. 
+Une fois le chemin final trouvé, une fonction parcoure ce chemin et change le fond de chaque cellule.
+
+
+Déplacement
+===========
+
+Le déplacement de personnage ce fait en JavaScript. Les focntions permetant de gérer ce déplacement ce trouve dans le fichier "deplacement.js"
+Le deplacement ce base sur le tableau Javascript qui découle du tableau PHP. Lors d'une demande de déplacement, le javascript vérifie si un mur est présent ou non sur la route. Le déplacement est validé ou non.
+Une fois arrivé, la résolution automatique du labyrinthe est lancé pour afficher le chemin final.
