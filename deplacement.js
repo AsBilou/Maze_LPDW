@@ -35,23 +35,25 @@ $(document).keydown(function(e){
     console.log(nom);
     if((nom == 38)||(nom == 90)||(nom == 87)){
         upPacman();
-        $("#controls a#btnUP").css("background-position","-54px -220px");
+        $("#controls a#btnUP").addClass("press-upArrow");
     }
     if((nom == 40)||(nom == 83)){
         downPacman();
-        $("#controls a#btnDOWN").css("background-position","-51px -277px");
+        $("#controls a#btnDOWN").addClass("press-downArrow");
+
     }
     if((nom == 37)||(nom == 81)||(nom == 65)){
         leftPacman();
-        $("#controls a#btnLEFT").css("background-position","-4px -250px");
+        $("#controls a#btnLEFT").addClass("press-leftArrow");
+
     }
     if((nom == 39)||(nom == 68)){
         rightPacman();
-        $("#controls a#btnRIGHT").css("background-position","-95px -250px");
+        $("#controls a#btnRIGHT").addClass("press-rightArrow");
     }
     if(nom == 82){
         resolveMaze();
-        $("#bigRedButton").css("background-position","center -254px");
+        $("#bigRedButton").addClass("press-redButton");
     }
     //Pas assez stable pour le moment pour etre implenté.
     if(nom == 71){
@@ -68,7 +70,7 @@ $(document).keydown(function(e){
                 $(".maze").html(html);
             }
         });*/
-        $("aside#control form button").css({"margin-top":"1px","box-shadow":"0px 1px 0px 0px rgba(109, 33, 9, 1)"});
+        $("aside#control form button").addClass("press-genButton");
     }
 });
 
@@ -76,22 +78,22 @@ $(document).keydown(function(e){
 $(document).keyup(function(e){
     nom = e.keyCode;
     if((nom == 38)||(nom == 90)){
-        $("#controls a#btnUP").css("background-position","-54px 1px");
+	    $("#controls a#btnUP").removeClass("press-upArrow");
     }
     if((nom == 40)||(nom == 83)){
-        $("#controls a#btnDOWN").css("background-position","-51px -56px");        
+        $("#controls a#btnDOWN").removeClass("press-downArrow");
     }
     if((nom == 37)||(nom == 81)){
-        $("#controls a#btnLEFT").css("background-position","-4px -29px");
+        $("#controls a#btnLEFT").removeClass("press-leftArrow");
     }
     if((nom == 39)||(nom == 68)){
-        $("#controls a#btnRIGHT").css("background-position","-95px -29px");
+        $("#controls a#btnRIGHT").removeClass("press-rightArrow");
     }
     if(nom == 82){
-        $("#bigRedButton").css("background-position","center -18px");
+        $("#bigRedButton").removeClass("press-redButton");
     }
     if(nom == 71){
-        $("aside#control form button").css({"margin-top":"-1px","box-shadow":"0px 3px 0px 0px rgba(109, 33, 9, 1)"});
+        $("aside#control form button").removeClass("press-genButton");
     }
 });
 
