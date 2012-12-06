@@ -172,6 +172,7 @@ function rightPacman(){
 function testVictoire(){
     if(position==cellEnd)
     {
+        resolveMaze();
         return true;
     }
     else{
