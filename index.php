@@ -73,7 +73,7 @@ $maze->buildMaze($start_cell);
                 <br/>                
                 <input type="text" maxlength="3" id="column" name="column" value="<?php echo $column; ?>" autocomplete="off"/>
                 <input type="text" maxlength="3" id="line" name="line" value="<?php echo $line; ?>" autocomplete="off"/>
-                <button type="submit">Generate <span>(G)</span></button>
+                <button type="submit">Generate <!--<span>(G)</span>--></button>
             </form>
             <div id="messageBox"><span class="big">Seriously?</span><br/>Even my goldfish can solve a maze of this size.<br/><span>(Insert numbers biggers than 4.)</span></div>
             <p class="moves"><span class="moves">MOVES :</span> Z S Q D <span class="moves">/</span> Arrow keys</p>
