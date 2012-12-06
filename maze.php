@@ -209,10 +209,10 @@ class maze{
      }
     
     //Construit le labyrinthe
-    public function buildMaze($start_cell){
+    public function buildMaze($ramdom_start_cell){
          //On commence de la cellule de départ
          $cell_auth=array(); //Tableau qui contiendra toutes les directions disponibles.
-         foreach($this->maze[$start_cell]['auth'] as $key=>$value){
+         foreach($this->maze[$ramdom_start_cell]['auth'] as $key=>$value){
             if($value == 1){
                 array_push($cell_auth, $key);
             }
@@ -226,7 +226,7 @@ class maze{
         foreach($cell_auth as $key=>$possible_direction){
             switch ($possible_direction){
                 case 0:     //Quand on monte
-                    $next_possible_cell = $start_cell - $this->column;
+                    $next_possible_cell = $ramdom_start_cell - $this->column;
                     //On repertorie l'état des cellule voisine.
                     switch ($this->maze[$next_possible_cell]['etat']) {
                         case 0:
@@ -241,7 +241,7 @@ class maze{
                     }
                     break;
                 case 1:     //Quand on va a droite
-                    $next_possible_cell = $start_cell +1;
+                    $next_possible_cell = $ramdom_start_cell +1;
                     switch ($this->maze[$next_possible_cell]['etat']) {
                         case 0:
                             array_push($possible_cell_virgin, $next_possible_cell);
@@ -255,7 +255,7 @@ class maze{
                     }
                     break;
                 case 2:     //Quand on descend.
-                    $next_possible_cell = $start_cell + $this->column;
+                    $next_possible_cell = $ramdom_start_cell + $this->column;
                     switch ($this->maze[$next_possible_cell]['etat']) {
                         case 0:
                             array_push($possible_cell_virgin, $next_possible_cell);
@@ -269,7 +269,7 @@ class maze{
                     }
                     break;
                 case 3:     //Quand on va a gauche
-                    $next_possible_cell = $start_cell -1;
+                    $next_possible_cell = $ramdom_start_cell -1;
                     switch ($this->maze[$next_possible_cell]['etat']) {
                         case 0:
                             array_push($possible_cell_virgin, $next_possible_cell);
@@ -287,13 +287,13 @@ class maze{
         
         //Si des cellules sont vierges alors on random pour choisir une direction
         if(!empty($possible_cell_virgin)){
-            $this->maze[$start_cell]['etat'] = 1;
+            $this->maze[$ramdom_start_cell]['etat'] = 1;
             $rand_keys = array_rand($possible_cell_virgin, 1);
             $next_cell = $possible_cell_virgin[$rand_keys];
-            array_push($this->chemin_parcourus,$start_cell);
+            array_push($this->chemin_parcourus,$ramdom_start_cell);
         }
         if(empty($possible_cell_virgin)){
-            $this->maze[$start_cell]['etat'] = 2;
+            $this->maze[$ramdom_start_cell]['etat'] = 2;
             $next_cell = end($this->chemin_parcourus);
             array_pop($this->chemin_parcourus);
         }
@@ -302,26 +302,26 @@ class maze{
         }
         if(!isset($continue)){
             //########################ON BRECK LES WALLS ENTRE CES CELLULES########################
-            if($next_cell == ($start_cell-$this->column)){//NORD
-                $this->maze[$start_cell]['wall'][0] = 0;//on casse le wall de la cellule
+            if($next_cell == ($ramdom_start_cell-$this->column)){//NORD
+                $this->maze[$ramdom_start_cell]['wall'][0] = 0;//on casse le wall de la cellule
                 $this->maze[$next_cell]['wall'][2] = 0;//on casse le mur de la prochaine cellule
             }
-            if($next_cell == ($start_cell+$this->column)){//SUD
-                $this->maze[$start_cell]['wall'][2] = 0;//on casse le wall de la cellule
+            if($next_cell == ($ramdom_start_cell+$this->column)){//SUD
+                $this->maze[$ramdom_start_cell]['wall'][2] = 0;//on casse le wall de la cellule
                 $this->maze[$next_cell]['wall'][0] = 0;//on casse le mur de la prochaine cellule
             }
-            if($next_cell == ($start_cell+1)){//EST
-                $this->maze[$start_cell]['wall'][1] = 0;//on casse le wall de la cellule
+            if($next_cell == ($ramdom_start_cell+1)){//EST
+                $this->maze[$ramdom_start_cell]['wall'][1] = 0;//on casse le wall de la cellule
                 $this->maze[$next_cell]['wall'][3] = 0;//on casse le mur de la prochaine cellule
             }
-            if($next_cell == ($start_cell-1)){//OUEST
-                $this->maze[$start_cell]['wall'][3] = 0;//on casse le wall de la cellule
+            if($next_cell == ($ramdom_start_cell-1)){//OUEST
+                $this->maze[$ramdom_start_cell]['wall'][3] = 0;//on casse le wall de la cellule
                 $this->maze[$next_cell]['wall'][1] = 0;//on casse le mur de la prochaine cellule
             }
-            $start_cell=$next_cell;
+            $ramdom_start_cell=$next_cell;
 
             //#####################################################################################
-            $this->buildMaze($start_cell);
+            $this->buildMaze($ramdom_start_cell);
         }
      }
 }
